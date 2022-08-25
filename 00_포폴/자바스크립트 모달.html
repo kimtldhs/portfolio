@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>javascript modal</title>
+<meta charset="utf-8">
+<style>
+/* reset */
+body, html { height:100%; }
+h2, p, div, h3 { margin:0; padding:0 }
+
+/* modal trigger */
+button { border:none; 
+            font-size:18px; 
+            background:#f44336;
+            color:#f9f9f9; 
+            padding:8px 16px; }
+h2 { padding:20px 0; }
+body { text-align:center; }
+
+/* modal overlay */
+#overlay { width:100%; 
+               height:100%; 
+               background:rgba(0,0,0,0.4);
+               position:fixed;
+               top:0; left:0; 
+               z-index:1; 
+               visibility:hidden; 
+               opacity:0;   
+               transition:all 0.5s ease;
+              }
+
+/* modal box */
+.modal { width:80%; 
+             background:#f5f5f5; 
+             margin:150px auto; }
+.modal_header { width:100%; position:relative; }
+.modal_header h3 { padding:20px 0; color:#333; }
+.modal_content { width:100%; 
+                         background:#fefefe;
+                         border:1px solid #888; 
+                         box-sizing:border-box;
+                         height:200px;  }
+.modal_content p {}
+.modal_footer { width:100%; 
+                      padding:10px 0; 
+                      font-size:14px; }
+.close { position:absolute; 
+            top:10px; right:20px; 
+            font-size:28px;
+            color:#aaa;
+            font-weight:bold;   }
+.close:hover, .close:focus {
+            color:#000; 
+            cursor:pointer; 
+   }
+          
+
+
+
+
+
+</style>
+</head>
+<body>
+<h2>자바스크립로 모달을 만들어 보자</h2>
+<button id="myBtn">모달창 열기</button>
+
+<div id="overlay">
+  <div id="myModal" class="modal">
+     <div class="modal_header">
+        <h3>모달 헤더 부분입니다</h3>
+        <span class="close">&times;</span>
+     </div>
+     <div class="modal_content">
+       <p>Some text in the Modal....</p>
+     </div>
+     <div class="modal_footer">
+       <p>copyright by KMS</p>
+     </div>
+  </div>
+</div>
+<!-- script>
+  var btn =  document.getElementById("myBtn");
+  var modal = document.getElementById("overlay");
+  var close = document.getElementsByClassName("close")[0];
+
+  btn.onclick = function(){
+       modal.style.visibility = "visible";
+       modal.style.opacity = 1; 
+  }
+
+  close.onclick = function(){
+      modal.style.visibility = "hidden";
+      modal.style.opacity = 0; 
+  }
+/* 어디를 클릭해도 창이 닫힌다 
+ modal.onclick = function(){
+      modal.style.visibility = "hidden";
+      modal.style.opacity = 0; 
+
+ }  */
+
+ /* overlay영역만 해당이 됨, 모달 바깥쪽 윈도우를 클릭할 때 실행*/
+ window.onclick = function(e){
+       if(e.target == modal) {
+        modal.style.visibility = "hidden";
+        modal.style.opacity = 0; 
+        }
+ }
+
+</script -->
+<script src="http://code.jquery.com/jquery-latest.js">
+</script>
+<script>
+  // 모달창 열기 이벤트
+  $("#myBtn").on("click", function(){
+          $("#overlay").css({ visibility:"visible", 
+                                     opacity:1 });
+  });
+
+  // 모달창 닫기 이벤트 
+  $(".close").on("click", function(){
+          $("#overlay").css({ visibility:"hidden", 
+                                     opacity:0 });
+  });
+
+ $(document).on("click", function(e){  
+        if( $("#overlay").is(e.target)) {
+         $("#overlay").css({ visibility:"hidden", 
+                                     opacity:0 });
+    }
+  });
+</script>
+
+</body>
+</html>
